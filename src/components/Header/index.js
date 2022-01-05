@@ -1,29 +1,16 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
-import Button from '../Button';
-import Title from '../Title';
+import React from 'react';
 
-import { ThemeContext } from '../../context/ThemeContext';
+import {Container} from './style';
 
-export default function Header(props) {
-  const { onToggleTheme } = useContext(ThemeContext);
+const SUN_ICON = "https://img.icons8.com/color/48/000000/sun--v2.png";
 
+export default function Header() {
   return (
-    <div>
-      <Title>{props.title}</Title>
-      <Button onClick={onToggleTheme}>
-        Mudar tema
-      </Button>
-      {props.children}
-    </div>
+    <Container>
+      <h1>Lucas' Blog</h1>
+      <button type="button">
+        <img src={SUN_ICON}/>
+      </button>
+    </Container>
   )
-}
-
-Header.propTypes = {
-  title: PropTypes.string.isRequired,
-  children: PropTypes.node,
-}
-
-Header.defaultProps = {
-  title: "LukeStack's blog",
 }

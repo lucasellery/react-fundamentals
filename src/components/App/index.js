@@ -5,8 +5,8 @@ import Header from '../Header';
 import { Title } from './styles';
 import Routes from '../Routes';
 import { ThemeProvider } from '../../context/ThemeContext';
-
-import styles from './App.scss';
+import GlobalStyle from '../../styles/global';
+import Layout from '../Layout';
 
 function App() {
   const [posts, setPosts] = useState([
@@ -43,25 +43,8 @@ function App() {
 
   return (
     <ThemeProvider>
-      <Header>
-        <Title as="h2">
-          Posts da semana
-          <button onClick={handleRefresh}>Atualizar</button>
-        </Title>
-      </Header>
-      
-      <hr />
-
-      <Routes />
-
-      {posts.map(post => (
-        <Post
-          key={post.id}
-          likes={post.likes}
-          onRemove={handleRemovePost}
-          post={post}
-        />
-      ))}
+      <GlobalStyle />
+      <Layout />
     </ThemeProvider>
   )
 }
