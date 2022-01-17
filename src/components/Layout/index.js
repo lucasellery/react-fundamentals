@@ -1,15 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useTheme } from 'styled-components';
 
 import Header from '../Header';
 import PostsList from '../PostsList';
 import Footer from '../Footer';
 
-export default function Layout() {
+export default function Layout({ onToggleTheme, selectedTheme }) {
+  const theme = useTheme();
+
   return (
     <>
-      <Header />
+      <Header
+        onToggleTheme={onToggleTheme}
+        selectedTheme={selectedTheme}
+      />
       <PostsList />
-      <Footer />
+      <Footer
+        onToggleTheme={onToggleTheme}
+        selectedTheme={selectedTheme}
+      />
+
+      <div
+        style={{
+          marginTop: 24,
+          backgroundColor: theme.footerBackgroundColor,
+          padding: 24
+        }}
+        >
+          hi, how are you doing?
+      </div>
     </>
   )
 }
