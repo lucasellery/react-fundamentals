@@ -1,35 +1,62 @@
 import React, { Component, useState, useMemo, useEffect } from 'react';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 import GlobalStyle from './styles/global';
 import Layout from './components/Layout';
+import { ThemeProvider, ThemeContext } from './contexts/ThemeContext';
 
 import themes from './styles/themes';
 
 class App extends Component {
   state = {
-    theme: "dark",
-  };
+    changed: false,
+  }
 
-  handleToggleTheme = () => {
-    this.forceUpdate();
-    this.setState(prevState => ({
-      theme: prevState.theme === 'dark' ? 'light' : 'dark'
-    }));
+  componentDidMount() {
+    console.log('componentDidMount: Did mount executed');
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("componentDidUpdate", {
+      currentState: this.state,
+      prevState,
+      prevState
+    });
+  }
+
+  componentDidCatch(error, info) {
+    console.log("componentDidCatch", { error, info });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('shouldComponentUpdate', {
+      currentState: this.state,
+      nextState,
+      nextProps,
+    });
+
+    return true;
+  }
+
+  componentWillUnmount() {
+    
   }
 
   render() {
-    const { theme } = this.state;
-    
-    console.log("App render executou");
-
     return (
-      <ThemeProvider theme={themes[theme] || themes.dark}>
-        <GlobalStyle />
-        <Layout
-          onToggleTheme={this.handleToggleTheme}
-          selectedTheme={theme}
-        />
+      <ThemeProvider>
+        <button onClick={() => this.setState({ changed: true })}>
+          change state
+        </button>
+        <ThemeContext.Consumer>
+          {({ theme }) => (
+            <StyledThemeProvider theme={themes[theme] || themes.dark}>
+              <GlobalStyle />
+              {theme === 'dark' && <Layout />}
+              <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            </StyledThemeProvider>
+          )}
+        </ThemeContext.Consumer>
       </ThemeProvider>
     )
   }

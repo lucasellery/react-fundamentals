@@ -1,34 +1,30 @@
-import React, { useEffect } from 'react';
-import { useTheme } from 'styled-components';
+import React from 'react';
 
 import Header from '../Header';
 import PostsList from '../PostsList';
 import Footer from '../Footer';
 
-export default function Layout({ onToggleTheme, selectedTheme }) {
-  const theme = useTheme();
+export default class Layout extends React.Component {
+  componenDidMount() {
+    document.addEventListener('scroll', this.handleScroll);
+  }
 
-  return (
-    <>
-      <Header
-        onToggleTheme={onToggleTheme}
-        selectedTheme={selectedTheme}
-      />
-      <PostsList />
-      <Footer
-        onToggleTheme={onToggleTheme}
-        selectedTheme={selectedTheme}
-      />
+  componentWillUnmount() {
+    // console.log('vai desmontar');
+    // document.removeEventListener('scroll', this.handleScroll);
+  }
 
-      <div
-        style={{
-          marginTop: 24,
-          backgroundColor: theme.footerBackgroundColor,
-          padding: 24
-        }}
-        >
-          hi, how are you doing?
-      </div>
-    </>
-  )
+  handleScroll = () => {
+    console.log("Scrolled...");
+  }
+
+  render() {
+    return (
+      <>
+        <Header />
+        <PostsList />
+        <Footer />
+      </>
+    );
+  }
 }
