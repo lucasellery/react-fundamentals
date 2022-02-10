@@ -45,15 +45,11 @@ class App extends Component {
   render() {
     return (
       <ThemeProvider>
-        <button onClick={() => this.setState({ changed: true })}>
-          change state
-        </button>
         <ThemeContext.Consumer>
           {({ theme }) => (
             <StyledThemeProvider theme={themes[theme] || themes.dark}>
               <GlobalStyle />
-              {theme === 'dark' && <Layout />}
-              <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+              <Layout />
             </StyledThemeProvider>
           )}
         </ThemeContext.Consumer>
